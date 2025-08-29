@@ -1,5 +1,5 @@
 import Pill from "../../ui/Pill";
-import Lines from "../../../assets/categories/vector.png";
+import Lines from "../../../assets/categories/Vector.png";
 import SectionHeader from "../../ui/SectionHeader";
 
 const itemsRow1 = ["ترابری", "ترابری", "رسانه", "مالی اعتباری", "ترابری"];
