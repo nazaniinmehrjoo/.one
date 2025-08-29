@@ -91,12 +91,11 @@ export default function Footer() {
             <FooterLinkColumn title="لینک ها" links={["www.link.com","www.link.com","www.link.com","www.link.com","www.link.com"]} />
           </div>
         </div>
+        <div>
+          <FooterBottom text=" @ هر واژه، هر تصویر، هر پیوند، متعلق به گروه ارزش آفرینی وان است" />
+        </div>
       </div>
-      <div
-  
-      >
-        <FooterBottom text=" @ هر واژه، هر تصویر، هر پیوند، متعلق به گروه ارزش آفرینی وان است" />
-      </div>
+
     </footer>
   );
 }
