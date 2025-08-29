@@ -21,7 +21,7 @@ export default function App() {
   }, []);
 
   return (
-    <main className="bg-white font-iransans">
+    <main className="bg-white font-iransans overflow-y-hidden">
       <Navbar />
       <Hero />
       <AboutOne />
