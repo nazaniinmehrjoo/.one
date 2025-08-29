@@ -21,24 +21,30 @@ export default function ContactSection() {
       className="relative pt-16 md:pt-20 overflow-hidden"
     >
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          data-aos="fade-left"
-          data-aos-delay="250"
-          data-aos-duration="700"
-          data-aos-easing="ease-out"
-          data-aos-once="true"
-        >
+        <div>
           <div className="container">
-            <SectionHeader
-              eyebrow="ONE GROUP"
-              caption="تماس با ما"
-              title="با ما در تماس باشید."
-              diamondAt="left"
-              lineWidthClass="w-48"
-              className="mb-2"
-            />
+            <div
+              data-aos="fade-left"
+              data-aos-delay="150"
+              data-aos-duration="700"
+              data-aos-easing="ease-out"
+              data-aos-once="true"
+            >
+              <SectionHeader
+                eyebrow="ONE GROUP"
+                caption="تماس با ما"
+                title="با ما در تماس باشید."
+                diamondAt="left"
+                lineWidthClass="w-48"
+                className="mb-2"
+              />
+            </div>
 
-            <div className="flex justify-start">
+            <div data-aos="fade-left"
+              data-aos-delay="250"
+              data-aos-duration="700"
+              data-aos-easing="ease-out"
+              data-aos-once="true" className="flex justify-start">
               <p className="max-w-[560px] text-[14px] leading-6 text-gray-600 text-right mb-8">
                 گفت‌وگو، آغاز هر پیوند است.
                 <br />
