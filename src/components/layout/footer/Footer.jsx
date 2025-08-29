@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-     <div className="container mx-auto px-4 text-center">
+      <div className="mx-auto px-4 text-center">
         <FooterBottom text=" @ هر واژه، هر تصویر، هر پیوند، متعلق به گروه ارزش آفرینی وان است" />
       </div>
     </footer>
