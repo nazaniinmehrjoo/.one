@@ -14,7 +14,7 @@ export default function Navbar() {
         <header className="absolute top-4 left-0 right-0 z-50">
             <div className="mx-auto max-w-6xl px-4">
                 <div dir="rtl" className="
-            grid grid-cols-[auto_1fr_auto] items-center
+            w-full grid grid-cols-[auto_1fr_auto] items-center
             h-14 md:h-16 px-2 md:px-6 justify-self-end
             rounded-2xl bg-white/30 backdrop-blur-sm">
 
