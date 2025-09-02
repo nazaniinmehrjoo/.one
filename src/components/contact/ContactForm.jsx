@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import FakeCaptcha from "../ui/FakeCaptcha";
 
 export default function ContactForm({ className = "" }) {
@@ -108,9 +108,9 @@ export default function ContactForm({ className = "" }) {
               placeholder="درخواست خود را بنویسید..."
               className="
               peer w-full h-[150px] pr-14 pl-3 py-2
-              rounded-[12px] bg-white border border-gray-300
+              rounded-[12px] bg-white 
               text-[13px] placeholder:text-gray-400
-              focus:outline-none focus:border-black focus:placeholder-transparent
+              focus:outline-none focus:border border-black focus:placeholder-transparent
               text-right
             "
             />
@@ -168,8 +168,8 @@ function Field({ label, icon, ...inputProps }) {
           {...inputProps}
           className="
             peer w-full h-11 pr-14 pl-3 rounded-[12px] bg-white
-            border border-gray-300 text-[13px] placeholder:text-gray-400
-            focus:outline-none focus:border-black focus:placeholder-transparent
+            text-[13px] placeholder:text-gray-400
+            focus:outline-none focus:border border-black focus:placeholder-transparent
             text-right
           "
         />
@@ -192,39 +192,115 @@ function Field({ label, icon, ...inputProps }) {
 }
 
 function SelectField({ label, icon, options = [], placeholder, name, value, onChange, className = "" }) {
-  const base =
-    "w-full h-11 pr-14 pl-10 rounded-[12px] bg-white border border-gray-300 text-[13px] focus:outline-none focus:border-black appearance-none text-right";
+  const [open, setOpen] = useState(false);
+  const [hoverIdx, setHoverIdx] = useState(-1);
+  const btnRef = useRef(null);
+  const panelRef = useRef(null);
+
+  useEffect(() => {
+    function onDocClick(e) {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(e.target) &&
+        btnRef.current &&
+        !btnRef.current.contains(e.target)
+      ) {
+        setOpen(false);
+        setHoverIdx(-1);
+      }
+    }
+    function onEsc(e) { if (e.key === "Escape") setOpen(false); }
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, []);
+
   const color = value ? "text-gray-900" : "text-[#9F9F9F]";
+  const selected = options.find((o) => o.value === value);
 
   return (
     <div>
       <label className="block text-[13px] text-gray-700 mb-2 text-right">{label}</label>
-      <div className="relative group">
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-9 grid place-items-center text-gray-400 group-focus-within:text-black">
-          <SvgIcon name={icon} />
-        </div>
 
-        <select
-          name={name}
-          value={value}
-          onChange={onChange}
-          className={`${base} ${color} ${className}`}
-          required
+      <div className="relative">
+        <button
+          ref={btnRef}
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className={`
+            group relative w-full h-11 pr-14 pl-10 rounded-[12px] bg-white text-[13px] text-right
+            border border-transparent focus:border-black
+            outline-none transition-[border-color] duration-150
+            ${color} ${className}
+          `}
+          aria-expanded={open}
+          aria-haspopup="listbox"
         >
-          <option value="" disabled>{placeholder}</option>
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
-        </select>
+          <span className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-9 grid place-items-center text-gray-400">
+            <SvgIcon name={icon} />
+          </span>
 
-        <span className="pointer-events-none absolute top-1/2 -translate-y-1/2 right-[45px] h-4 w-px bg-gray-200 group-focus-within:bg-black" />
-        <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
-        </div>
+          <span className="
+            pointer-events-none absolute top-1/2 -translate-y-1/2 right-[45px] h-4 w-px
+            bg-gray-200 group-hover:bg-black group-focus:bg-black
+          " />
+
+          <span className="truncate">{selected ? selected.label : placeholder}</span>
+
+          <span className={`pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 transition-transform ${open ? "rotate-180" : ""}`}>
+            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" /></svg>
+          </span>
+        </button>
+
+        {open && (
+          <div
+            ref={panelRef}
+            className="
+              absolute z-50 left-0 right-0 top-[calc(100%+8px)]
+              rounded-[16px] border border-[#EDEDED] bg-white
+              shadow-[0_8px_18px_rgba(0,0,0,0.06)] p-2
+            "
+            role="listbox"
+          >
+            {options.map((opt, i) => {
+              const active = value === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onMouseEnter={() => setHoverIdx(i)}
+                  onMouseLeave={() => setHoverIdx(-1)}
+                  onClick={() => {
+                    onChange({ target: { name, value: opt.value } });
+                    setOpen(false);
+                  }}
+                  className="group relative w-full text-right px-3 py-2.5 rounded-[12px] text-[15px] transition"
+                  role="option"
+                  aria-selected={active}
+                >
+                  <span
+                    aria-hidden
+                    className={`
+                      absolute inset-x-2 inset-y-1 rounded-[12px] bg-[#F5F5F5]
+                      transition-opacity ${active || hoverIdx === i ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
+                    `}
+                  />
+                  <span className={`relative z-10 ${active ? "font-semibold" : "font-medium"} text-gray-900`}>
+                    {opt.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
 }
+
 
 function SvgIcon({ name }) {
   const common = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor" };
