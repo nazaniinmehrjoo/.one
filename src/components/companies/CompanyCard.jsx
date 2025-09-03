@@ -15,6 +15,7 @@ export default function CompanyCard({ logo, excerpt, aos }) {
         relative isolate bg-white rounded-[28px] px-6 py-6 min-h-[142px]
         flex flex-col items-center justify-center text-center
         mb-14 sm:mb-16 md:mb-0
+        group
       "
     >
       <img
@@ -24,13 +25,15 @@ export default function CompanyCard({ logo, excerpt, aos }) {
         loading="lazy"
       />
       <p className="text-[14px] text-gray-900">{excerpt}</p>
-
       <div
         className="
           absolute bottom-[-40px] left-1/2 -translate-x-1/2
           w-[88px] h-[40px] bg-white clip-path-polygon
           flex flex-col items-center justify-center cursor-pointer leading-[0.5]
           z-10
+          opacity-0 translate-y-4
+          transition-all duration-300 ease-in-out
+          group-hover:opacity-100 group-hover:translate-y-0
         "
         onClick={handleIconClick}
         aria-label="درباره شرکت"
@@ -45,8 +48,20 @@ export default function CompanyCard({ logo, excerpt, aos }) {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M4.94165 12.0252L9.99998 17.0835L15.0583 12.0252" stroke="black" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" />
-            <path d="M10 2.91689L10 16.9419" stroke="black" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" />
+            <path
+              d="M4.94165 12.0252L9.99998 17.0835L15.0583 12.0252"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+            />
+            <path
+              d="M10 2.91689L10 16.9419"
+              stroke="black"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
+              strokeLinecap="round"
+            />
           </svg>
         </div>
       </div>
