@@ -2,6 +2,9 @@ import img1 from "../assets/news/img1.png";
 import img2 from "../assets/news/img2.png";
 import img3 from "../assets/news/img3.png";
 import img4 from "../assets/news/img4.png";
+import img5 from "../assets/news/img5.png";
+
+
 
 export const topNews = [
   {
@@ -53,11 +56,12 @@ export const bottomNews = [
   },
   {
     id: 5,
-    image: img2,
+    image: img5,
     title: "لورم ایپسوم متن ساختگی!",
     tags: ["ایمنی", "رانندگی"],
     date: "۲۷ فروردین ۱۴۰۴",
     time: "۵ دقیقه",
     aos: "fade-left",   
   },
+  
 ];
