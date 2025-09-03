@@ -8,7 +8,7 @@ const LANGS = [
   { code: "tr", native: "Turkish", abbr: "Tr" },
 ];
 
-const WIDTH = 100; // px
+const WIDTH = 88; // px
 
 const ITEM_DURATION = 220; // ms
 const ITEM_STAGGER = 80;  // ms
@@ -132,9 +132,9 @@ export default function LanguageSwitcher({ value = "fa", onChange }) {
         className={`
           relative
           inline-flex items-center justify-between gap-2
-          h-10 px-5
+          px-5 h-[35px]
           transition text-base focus:outline-none focus:ring-none
-          rounded-t-2xl
+          rounded-t-[12px]
           rounded-b-[var(--rb)]
           ${looksUnified
             ? "bg-white shadow-none"
@@ -146,7 +146,7 @@ export default function LanguageSwitcher({ value = "fa", onChange }) {
             ? (phase === 'closing'
               ? `${0.75 * closeProgress}rem`
               : '0rem')
-            : '1rem',
+            : '12px',
           transitionProperty: 'border-radius, background-color, color, box-shadow, transform',
           transitionDuration: `${ITEM_STAGGER + 120}ms`,
           transitionTimingFunction: 'ease-out',
@@ -176,7 +176,7 @@ export default function LanguageSwitcher({ value = "fa", onChange }) {
           aria-label="انتخاب زبان"
           className={`
             absolute left-0 top-full -mt-px
-            rounded-b-2xl 
+            rounded-b-[12px]
             bg-white shadow-lg z-50 overflow-hidden origin-top
             will-change-[opacity,height]
             transition-[opacity,height] ease-out
@@ -216,8 +216,8 @@ export default function LanguageSwitcher({ value = "fa", onChange }) {
                     onClick={() => handlePick(l.code)}
                     className={`
                       w-full h-10 px-2 grid grid-cols-2 items-center
-                      hover:bg-gray-100 active:bg-transparent
-                      transition-all ease-[cubic-bezier(.22,1,.36,1)]
+                      hover:bg-gray-100 active:bg-transparent 
+                      transition-all ease-[cubic-bezier(.22,1,.36,1)] gap-10
                       will-change-[opacity,transform,background-color]
                       ${shouldShow ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}
                     `}
@@ -229,7 +229,7 @@ export default function LanguageSwitcher({ value = "fa", onChange }) {
                     <span className={`font-semibold justify-self- ${active ? "text-gray-900 font-medium" : "text-gray-900"}`}>
                       {l.abbr}
                     </span>
-                    <span className="justify-self-end text-sm font-thin truncate text-gray-900">{l.native}</span>
+                    <span className="justify-self-end text-[12px] font-thin truncate text-gray-900">{l.native}</span>
                   </button>
                 </li>
               );
