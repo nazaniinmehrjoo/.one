@@ -104,9 +104,9 @@ export default function NewsCard({ image, title, tags = [], date, time, aos }) {
           <button
             type="button"
             aria-label="مشاهده"
-            className="absolute bottom-4 left-4 md:bottom-6 md:left-7 z-10 grid w-11 h-11 place-items-center rounded-xl bg-white"
+            className="absolute bottom-3 left-3  z-10 grid w-11 h-11 place-items-center rounded-xl bg-white"
           >
-            <svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="22" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 9.348L16 0 8.229 9.465 15.755 19 0 9.348Z" fill="black" />
             </svg>
           </button>
