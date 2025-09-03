@@ -38,24 +38,11 @@ export default function CompaniesSection() {
     const onResize = () => updateThumb();
     const onScroll = () => updateThumb();
 
-    const prevent = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    };
-
     sc.addEventListener("scroll", onScroll, { passive: true });
-    sc.addEventListener("wheel", prevent, { passive: false });
-    sc.addEventListener("touchmove", prevent, { passive: false });
-    sc.addEventListener("keydown", prevent, { passive: false });
-
     window.addEventListener("resize", onResize);
 
     return () => {
       sc.removeEventListener("scroll", onScroll);
-      sc.removeEventListener("wheel", prevent);
-      sc.removeEventListener("touchmove", prevent);
-      sc.removeEventListener("keydown", prevent);
       window.removeEventListener("resize", onResize);
     };
   }, []);
@@ -147,15 +134,10 @@ export default function CompaniesSection() {
             data-aos-duration="600"
             data-aos-once="true"
           >
-
             <div
               ref={scrollRef}
               tabIndex={-1}
-              className="
-                h-full overflow-y-auto pr-3
-                [scrollbar-width:none]
-                [&::-webkit-scrollbar]:hidden
-              "
+              className="h-full overflow-y-hidden pr-3"
             >
               <div className="space-y-28 pb-6">
                 {companiesData.map((group) => (
@@ -169,7 +151,6 @@ export default function CompaniesSection() {
                 <div className="h-6" />
               </div>
             </div>
-
 
             <div
               ref={trackRef}
